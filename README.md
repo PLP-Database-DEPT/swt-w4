@@ -1,63 +1,97 @@
 # 🧪 Week 4 Assignment: Test Design Techniques Lab
 
-## 📌 Objectives
-- Apply **black-box** (equivalence partitioning, boundary analysis, decision tables) and **white-box** (statement, decision coverage) techniques.
-- Identify and document bugs via GitHub Issues.
-- Summarize findings in a structured `Test_Report.md`.
+## 🎯 **Learning Objectives**
+* Apply **black-box** (equivalence partitioning, boundary analysis, decision tables) and **white-box** (statement, decision coverage) testing techniques.
+* Collaborate in groups of 3 to identify and document bugs via GitHub Issues.
+* Summarize findings in a structured `Test_Report_Summary.md`.
 
 ---
 
-## 🛠️ Setup
-1. **Code**: Use the provided [e-commerce filter system](index.html).
-2. **Testing Tools**:
-   - Jest (for white-box testing)
-   - Mermaid.js (for diagrams, optional)
+## 📋 **What You'll Need**
+* 💻 A browser (e.g., Chrome, Firefox, or Edge).
+* 📂 The provided [e-commerce filter system](index.html).
+* 🌐 Access to the course GitHub repository.
 
 ---
 
-## 📋 Tasks
+## 🛠️ **Group Collaboration**
+- Form groups of **3**. Each group will work together to complete the assignment and submit a single report.
 
-### 1. Black-Box Testing (3 Hours)
-#### Techniques to Apply:
-| Technique          | Target Component       | Expected Artifact       |
-|--------------------|------------------------|-------------------------|
-| Equivalence Partitioning | Brand/Price/Storage filters | `test_cases/partitions.csv` |
-| Boundary Analysis  | Storage input (64GB-1024GB) | `test_cases/boundary_tests.csv` |
-| Decision Table     | Filter combinations    | `test_cases/decision_table.md` |
+---
 
-#### Steps:
-1. Test valid/invalid inputs for each filter.
-2. Document **2+ bugs** as GitHub Issues with:
-   ```markdown
-   - **Steps**: Select price range "1000-1500"
-   - **Expected**: Shows iPhone 14 Pro ($1499)
-   - **Actual**: No products displayed
-   - **Label**: `black-box`
+## 📝 **Submission Instructions**  
+1. **Create a single `Test_Report_Summary.md` file** that includes:
+   - ✅ A list of **3 expected behaviors** of the e-commerce filter system.
+   - 🔗 Links to **2 GitHub Issues** raised by the group, following the format below.
+   - **Summary of black-box and white-box testing techniques applied** during the assignment.
 
-## 2. White-Box Testing (2 Hours)
+2. **Raise the bug reports directly on GitHub** using the Issues tab of the class repository. These issues will be referenced by ID and linked in your `Test_Report_Summary.md` file.
 
-### 🎯 Coverage Goals
-| Function          | Coverage Target      | Test File               |
-|-------------------|----------------------|-------------------------|
-| `applyFilters()`  | 100% statement       | `tests/coverage.test.js` |
-| `renderProducts()`| Decision coverage    | `tests/render.test.js`   |
+### Bug Report Format
+```markdown
+**Title**: [e.g., "Price filter does not display expected products"]
 
-### 📝 Steps
-1. **Write Jest tests** to cover:
-   - All paths in `applyFilters()` (validation, filtering logic)
-   - Decision points in `renderProducts()` (empty array, product rendering)
+**Steps to Reproduce**:
+1. Select price range "1000-1500"
+2. Click "Apply Filters"
 
-2. **Identify untested branches**:
-   ```javascript
-   // Example: This branch isn't tested in renderProducts()
-   if (products.length === 0) {
-     // Empty state handling
-   }
-3. **Create GitHub Issues for code flaws (1+ required):**
-      ```markdown
-    - **File**: `index.html`, Line 105
-    - **Bug**: Storage filter requires exact match (should be "≥")
-    - **Expected**: `storage=128` should show products with 128GB+
-    - **Actual**: Only shows exact 128GB matches
-    - **Label**: `white-box`
+**Expected**: Should display iPhone 14 Pro ($1499)  
+**Actual**: No products displayed  
+**Severity**: Medium
+```
 
+---
+
+## 🚀 **Run in VS Code (Live Server)**
+
+### **Prerequisites**
+- Install [VS Code](https://code.visualstudio.com/download)
+- Add the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
+
+### **Quick Setup**
+1. Clone and open the repository:
+   ```bash
+   git clone https://github.com/PLP-Database-DEPT/swt-w4.git
+   cd swt-w4
+   code .
+   ```
+
+2. Open `index.html` in VS Code's Explorer (Ctrl+Shift+E), right-click, and select Open with Live Server.
+
+---
+
+## 📚 **Assignment Questions**
+
+### Question 1 📋  
+Write down **3 expected behaviors** that the e-commerce filter system should have in the `Test_Report_Summary.md` file.  
+📌 Example:
+* Products should be filtered correctly based on selected brand.
+
+### Question 2 🐛  
+Test the e-commerce filter system by interacting with the application.  
+Find and report **2 bugs** using GitHub Issues. Use the provided format above.
+
+---
+
+## 🧪 **Testing Techniques to Apply**
+
+### Black-Box Testing
+- **Equivalence Partitioning**: Identify valid and invalid input classes for filters (e.g., brands, price ranges).
+- **Boundary Value Analysis**: Test edge values for storage input (e.g., 64GB, 1024GB).
+- **Decision Table Testing**: Create a decision table for filter combinations and expected outputs.
+
+### White-Box Testing
+- **Statement Coverage**: Ensure all executable statements in the code are tested.
+- **Decision Coverage**: Test all decision points in the filtering logic (e.g., if/else conditions).
+
+---
+
+## 💭 **Reflection**  
+Capture your group's reflections in the `Test_Report_Summary.md` file. Discuss:
+- What challenges did you face during testing?
+- How did collaboration help in identifying bugs?
+- What black-box and white-box techniques were most effective?
+
+*How to edit a [markdown file](https://www.markdownguide.org/basic-syntax/#headings)*
+
+### NOTE: You should not fork the repository.
