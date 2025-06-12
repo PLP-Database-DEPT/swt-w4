@@ -1,4 +1,4 @@
-# 🧪 Week 4 Assignment: Test Design Techniques Lab
+# 🧪 Week 4 Assignment: Test Design Techniques 
 
 ## 🎯 **Learning Objectives**
 * Apply **black-box** (equivalence partitioning, boundary analysis, decision tables) and **white-box** (statement, decision coverage) testing techniques.
