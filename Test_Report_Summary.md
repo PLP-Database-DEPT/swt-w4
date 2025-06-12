@@ -1,7 +1,5 @@
 # 🧪 Testing Report for E-Commerce Filter System
 
-# Test_Report_Summary
-
 **Project:** E-Commerce Filter System  
 **Date:** YYYY-MM-DD  
 **Group Members:** @Member1, @Member2, @Member3
@@ -35,7 +33,19 @@
 
 ---
 
-## 3. Defect Log & GitHub Issues
+## 3. Group Member Contributions
+
+| Member    | Black-Box Techniques Applied          | White-Box Techniques Applied         | Other Contributions                |
+|-----------|--------------------------------------|-------------------------------------|------------------------------------|
+| @Member1  | Equivalence Partitioning: tested all brand and price ranges | Statement coverage: tested all lines in applyFilters() | Wrote bug report #12               |
+| @Member2  | Boundary Value Analysis: tested min/max storage and price | Decision coverage: tested if/else in renderProducts() | Documented test cases, summary     |
+| @Member3  | Decision Table: created filter combination matrix | Reviewed code paths and edge cases | Wrote bug report #14, reflections  |
+
+*Each member should briefly describe their specific efforts and the techniques they applied.*
+
+---
+
+## 4. Defect Log & GitHub Issues
 
 ### Linked GitHub Issues
 
@@ -70,7 +80,7 @@
 
 ---
 
-## 4. Reflection
+## 5. Reflection
 
 **Challenges Faced:**  
 - Ensuring all edge cases (e.g., minimum/maximum price) were tested.
@@ -85,6 +95,9 @@
 - Decision table testing was useful for complex filter combinations.
 
 ---
+
+## 6. Coverage Gaps (Optional Visualization)
+
 
 ## 5. Coverage Gaps (Optional Visualization)
 ![mermaidjs](https://github.com/user-attachments/assets/3f0e2915-2256-42be-b3ba-40b0ce0413cc)
