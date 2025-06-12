@@ -1,75 +1,94 @@
 # 🧪 Testing Report for E-Commerce Filter System
 
-## 👤 Team Information
-- **Team Members**: [Your Full Name 1], [Your Full Name 2], [Your Full Name 3]  
-- **Cohort**: [e.g., May 2025]  
-- **Date**: [Submission Date]  
+# Test_Report_Summary
+
+**Project:** E-Commerce Filter System  
+**Date:** YYYY-MM-DD  
+**Group Members:** @Member1, @Member2, @Member3
 
 ---
 
-## 📋 Introduction
-This report summarizes the testing conducted on the E-Commerce Filter System as part of our Week 4 assignment. The primary objective was to apply various testing techniques to ensure the application functions correctly and meets user requirements.
+## 1. Expected Behaviors
+
+1. Products should be filtered correctly based on the selected brand.
+2. Products should appear or disappear based on the selected price range.
+3. Only products with storage matching the selected value should be displayed.
 
 ---
 
-## 🧪 Testing Objectives
-- To apply **black-box testing** techniques, including equivalence partitioning, boundary value analysis, and decision table testing.
-- To apply **white-box testing** techniques, including statement coverage and decision coverage.
-- To identify and document any bugs or issues encountered during testing.
+## 2. Test Strategy
+
+### Black-Box Testing Techniques
+
+| Technique                | Scope                        | Example/Test Case Description                 |
+|--------------------------|------------------------------|----------------------------------------------|
+| Equivalence Partitioning | Brand, Price, Storage inputs | Test valid/invalid brands, price ranges      |
+| Boundary Value Analysis  | Price, Storage               | Test 64GB, 1024GB, min/max price boundaries  |
+| Decision Table Testing   | Filter combinations          | Test combinations of brand + price + storage |
+
+### White-Box Testing Techniques
+
+| Coverage Type   | Target Function(s)     | Tool/Method | Coverage (%) |
+|-----------------|-----------------------|-------------|--------------|
+| Statement       | applyFilters()        | Manual      | 100%         |
+| Decision        | renderProducts()      | Manual      | 85%          |
 
 ---
 
-## 🧪 What We Tested
+## 3. Defect Log & GitHub Issues
 
-| Test Type        | Description                                                                 |
-|------------------|------------------------------------------------------------------------------|
-| **Unit Test**     | [Describe the unit tests performed, e.g., testing specific functions or components.] |
-| **Integration Test** | [Describe the integration tests performed, e.g., verifying interactions between components.] |
-| **System Test**   | [Describe the system tests performed, e.g., end-to-end testing of the application.] |
+### Linked GitHub Issues
 
----
+- [#12: Price filter does not display expected products](https://github.com/PLP-Database-DEPT/swt-w4/issues/12)
+- [#14: Storage filter requires exact match](https://github.com/PLP-Database-DEPT/swt-w4/issues/14)
 
-## 🐛 Bugs / Issues Identified
+### Bug Report 1
 
-| Type             | Description                                                                 |
-|------------------|------------------------------------------------------------------------------|
-| Unit             | [Describe any unit-level bugs identified.]                                   |
-| Integration      | [Describe any integration-level bugs identified.]                            |
-| System           | [Describe any system-level bugs identified.]                                 |
-| UI / UX          | [Describe any user interface or user experience issues identified.]         |
-| Accessibility    | [Describe any accessibility issues identified.]                              |
+**Title**: Price filter does not display expected products
 
-*GitHub Issues Filed: [Link to Issue 1], [Link to Issue 2], [Link to Issue 3]*
+**Steps to Reproduce**:
+1. Select price range "1000-1500"
+2. Click "Apply Filters"
+
+**Expected**: Should display iPhone 14 Pro ($1499)  
+**Actual**: No products displayed  
+**Severity**: Medium
 
 ---
 
-## 💬 Reflection
+### Bug Report 2
 
-### 1. What did we learn from testing this app?
-> [Provide insights gained from the testing process.]
+**Title**: Storage filter requires exact match
 
-### 2. Which part of the app had the most bugs or problems?
-> [Discuss which features or components had the most issues.]
+**Steps to Reproduce**:
+1. Select storage "256GB"
+2. Click "Apply Filters"
 
-### 3. What testing strategy worked best for us?
-> [Reflect on the effectiveness of the testing strategies used.]
-
-### 4. What was challenging during this lab?
-> [Discuss any challenges faced during the testing process.]
+**Expected**: Should display all products with 256GB storage  
+**Actual**: Only displays products if storage is an exact string match  
+**Severity**: Low
 
 ---
 
-## ✅ Conclusion
-In conclusion, our testing of the E-Commerce Filter System revealed several critical issues that need to be addressed. We recommend that the identified bugs be prioritized for resolution to enhance the overall user experience and functionality of the application.
+## 4. Reflection
+
+**Challenges Faced:**  
+- Ensuring all edge cases (e.g., minimum/maximum price) were tested.
+- Interpreting ambiguous filter behaviors (e.g., overlapping ranges).
+
+**Collaboration Benefits:**  
+- Group discussions helped uncover bugs that were missed individually.
+- Sharing test cases improved overall coverage and efficiency.
+
+**Most Effective Techniques:**  
+- Boundary value analysis quickly revealed issues at price/storage limits.
+- Decision table testing was useful for complex filter combinations.
 
 ---
 
-## ✅ Checklist
-- [ ] We wrote and ran unit, integration, and system tests for the e-commerce filter system.  
-- [ ] We filed 3 functional GitHub Issues with clear descriptions.  
-- [ ] We completed this Test Report and reflected on the process.  
+## 5. Coverage Gaps (Optional Visualization)
+![mermaidjs](https://github.com/user-attachments/assets/3f0e2915-2256-42be-b3ba-40b0ce0413cc)
 
-### Instructions for Use
-- Replace placeholders like `[Your Full Name 1]`, `[Your Full Name 2]`, `[Your Full Name 3]`, `[Submission Date]`, and the links to GitHub Issues with the actual information.
-- Fill in the sections with specific details about your testing activities, findings, and reflections.
-- Ensure that the report accurately reflects your team's collaborative efforts and the issues identified during the assignment.
+---
+
+*End of Report*
