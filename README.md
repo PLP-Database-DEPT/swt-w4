@@ -1,97 +1,142 @@
-# 🧪 Week 4 Assignment: Test Design Techniques 
+# 🧪 Week 4 Graded Assignment: Test Design Techniques on the E-Commerce Filter System
 
-## 🎯 **Learning Objectives**
-* Apply **black-box** (equivalence partitioning, boundary analysis, decision tables) and **white-box** (statement, decision coverage) testing techniques.
-* Collaborate in groups of 3 to identify and document bugs via GitHub Issues.
-* Summarize findings in a structured `Test_Report_Summary.md`.
+🎯 **Learning Objectives**
 
----
+By completing this assignment, you will be able to:
 
-## 📋 **What You'll Need**
-* 💻 A browser (e.g., Chrome, Firefox, or Edge).
-* 📂 The provided [e-commerce filter system](index.html).
-* 🌐 Access to the course GitHub repository.
+- Apply **Equivalence Partitioning (EP)**, **Boundary Value Analysis (BVA)**, **Decision Table Testing (DTT)**, and **State/Flow Testing** techniques on a real interactive web application.  
+- Create structured, traceable test cases from functional behavior.  
+- Identify and document observable defects clearly and professionally.  
+- Reflect on the role of systematic test design in improving coverage and quality.
 
 ---
 
-## 🛠️ **Group Collaboration**
-- Form groups of **3**. Each group will work together to complete the assignment and submit a single report.
+## 📋 **What You’ll Need**
+
+- 💻 VS Code with **Live Server** extension installed  
+- 🌐 Any modern browser (Chrome, Edge, Firefox)  
+- 📂 The provided file: `index.html` (E-Commerce Filter System)  
+- 🧾 Markdown editor (VS Code is sufficient)
+
+> **Note:** Do *not* change or fix the code. Your task is to **test and document**, not to refactor or debug.
 
 ---
 
-## 📝 **Submission Instructions**  
-1. **Create a single `Test_Report_Summary.md` file** that includes:
-   - ✅ A list of **3 expected behaviors** of the e-commerce filter system.
-   - 🔗 Links to **2 GitHub Issues** raised by the group, following the format below.
-   - **Summary of black-box and white-box testing techniques applied** during the assignment.
+## 🧩 **Scenario: SmartPhone Hub Filter System**
 
-2. **Raise the bug reports directly on GitHub** using the Issues tab of the class repository. These issues will be referenced by ID and linked in your `Test_Report_Summary.md` file.
+You are testing a small web application that helps users filter smartphones by **brand**, **price range**, and **storage**.  
 
-### Bug Report Format
-```markdown
-**Title**: [e.g., "Price filter does not display expected products"]
+The system should:
+- Display correct products matching selected filters  
+- Handle invalid or boundary inputs gracefully  
+- Show “No products match your filters” when no result fits  
 
-**Steps to Reproduce**:
-1. Select price range "1000-1500"
-2. Click "Apply Filters"
+Your goal is to design structured test cases that uncover defects and validate expected behaviors.
 
-**Expected**: Should display iPhone 14 Pro ($1499)  
-**Actual**: No products displayed  
-**Severity**: Medium
+---
+
+## 🧪 **What You’ll Do**
+
+### 1️⃣ Step 1: Run the Application
+1. Open the provided `index.html` file in VS Code.  
+2. Right-click → **Open with Live Server**.  
+3. Explore the filter options manually.  
+4. Observe how the app reacts to different input combinations.
+
+---
+
+### 2️⃣ Step 2: Equivalence Partitioning (EP)
+
+**Objective:** Identify valid and invalid input *classes* for each field.
+
+| Input | Partitions (Valid / Invalid) | Representative Value | Expected Behavior | Actual Behavior |
+|--------|-------------------------------|----------------------|-------------------|-----------------|
+| Brand |                               |                      |                   |                 |
+| Price Range |                          |                      |                   |                 |
+| Storage (GB) |                         |                      |                   |                 |
+
+✅ **Task:**  
+- Determine which classes of input should behave the same.  
+- Test one value from each partition.  
+- Note any deviations between *Expected* and *Actual*.
+
+---
+
+### 3️⃣ Step 3: Boundary Value Analysis (BVA)
+
+**Objective:** Test edge values around valid input limits.
+
+| Parameter | Boundaries Identified | Test Values (−1 / = / +1) | Expected | Actual | Notes |
+|------------|------------------------|----------------------------|-----------|---------|--------|
+| Storage (GB) | | | | | |
+| Price Range | | | | | |
+
+✅ **Task:**  
+Focus on values close to **64 GB** (minimum) and **1024 GB** (maximum), and on price range boundaries (e.g., 500, 1000, 1500).  
+Observe whether the app includes or excludes those limits correctly.
+
+---
+
+### 4️⃣ Step 4: Decision Table Testing (DTT)
+
+**Objective:** Combine multiple inputs and predict outcomes.
+
+| Brand | Price Range | Storage | Expected Outcome (count/message) | Actual Outcome | Pass/Fail |
+|--------|--------------|----------|----------------------------------|----------------|-----------|
+|        |              |          |                                  |                |           |
+
+✅ **Task:**  
+Create 6–10 representative combinations that reflect:
+- Different filter conditions  
+- Valid vs invalid intersections  
+- “No result” scenarios  
+
+Mark Pass/Fail after testing.
+
+---
+
+### 5️⃣ Step 5: State / Flow Testing
+
+**Objective:** Identify major UI states and how they transition when the user interacts with the filters.
+
+Use either a **Mermaid diagram** or a short **state table**.
+
+Example structure (to customize):
+
+```mermaid
+stateDiagram-v2
+  [*] --> Start
+  Start --> InputReady: user selects filters
+  InputReady --> Results: click "Apply Filters"
+  Results --> NoResults: conditions exclude all
+  NoResults --> Results: adjust filters
+  Results --> Start: reset or clear filters
 ```
 
----
-
-## 🚀 **Run in VS Code (Live Server)**
-
-### **Prerequisites**
-- Install [VS Code](https://code.visualstudio.com/download)
-- Add the [Live Server extension](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
-
-### **Quick Setup**
-1. Clone and open the repository:
-   ```bash
-   git clone https://github.com/PLP-Database-DEPT/swt-w4.git
-   cd swt-w4
-   code .
-   ```
-
-2. Open `index.html` in VS Code's Explorer (Ctrl+Shift+E), right-click, and select Open with Live Server.
+✅ **Task:**  
+- List the states you observed.  
+- Describe which actions triggered them.  
+- Note any missing or unexpected transitions.
 
 ---
 
-## 📚 **Assignment Questions**
+### 6️⃣ Step 6: Defect Reports
 
-### Question 1 📋  
-Write down **3 expected behaviors** that the e-commerce filter system should have in the `Test_Report_Summary.md` file.  
-📌 Example:
-* Products should be filtered correctly based on selected brand.
+Document **2–3 reproducible bugs** using a standard format:
 
-### Question 2 🐛  
-Test the e-commerce filter system by interacting with the application.  
-Find and report **2 bugs** using GitHub Issues. Use the provided format above.
+```markdown
+**Title:** [Brief description]  
+**Steps to Reproduce:**  
+1. ...
+2. ...
+3. ...
 
----
+**Expected:**  
+[Describe what should happen]
 
-## 🧪 **Testing Techniques to Apply**
+**Actual:**  
+[Describe what actually happens]
 
-### Black-Box Testing
-- **Equivalence Partitioning**: Identify valid and invalid input classes for filters (e.g., brands, price ranges).
-- **Boundary Value Analysis**: Test edge values for storage input (e.g., 64GB, 1024GB).
-- **Decision Table Testing**: Create a decision table for filter combinations and expected outputs.
+**Severity:** Low / Medium / High  
+**Notes:** (optional)
 
-### White-Box Testing
-- **Statement Coverage**: Ensure all executable statements in the code are tested.
-- **Decision Coverage**: Test all decision points in the filtering logic (e.g., if/else conditions).
-
----
-
-## 💭 **Reflection**  
-Capture your group's reflections in the `Test_Report_Summary.md` file. Discuss:
-- What challenges did you face during testing?
-- How did collaboration help in identifying bugs?
-- What black-box and white-box techniques were most effective?
-
-*How to edit a [markdown file](https://www.markdownguide.org/basic-syntax/#headings)*
-
-### NOTE: You should not fork the repository.
