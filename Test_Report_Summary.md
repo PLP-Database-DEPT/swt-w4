@@ -1,107 +1,135 @@
-# 🧪 Testing Report for E-Commerce Filter System
-
-**Project:** E-Commerce Filter System  
-**Date:** YYYY-MM-DD  
-**Group Members:** @Member1, @Member2, @Member3
-
----
-
-## 1. Expected Behaviors
-
-1. Products should be filtered correctly based on the selected brand.
-2. Products should appear or disappear based on the selected price range.
-3. Only products with storage matching the selected value should be displayed.
+# 🧪 Week 4 Graded Assignment: Test Design Techniques Report  
+**System Under Test:** E-Commerce Filter System  
+**Student Name:** _________________________  
+**Date:** _________________________________  
 
 ---
 
-## 2. Test Strategy
+## 🧩 1. Equivalence Partitioning (EP)
 
-### Black-Box Testing Techniques
+**Objective:** Identify valid and invalid input classes for each control and test one representative from each.
 
-| Technique                | Scope                        | Example/Test Case Description                 |
-|--------------------------|------------------------------|----------------------------------------------|
-| Equivalence Partitioning | Brand, Price, Storage inputs | Test valid/invalid brands, price ranges      |
-| Boundary Value Analysis  | Price, Storage               | Test 64GB, 1024GB, min/max price boundaries  |
-| Decision Table Testing   | Filter combinations          | Test combinations of brand + price + storage |
+| Input | Partitions (Valid / Invalid) | Representative Value | Expected Behavior | Actual Behavior | Pass/Fail |
+|--------|-------------------------------|----------------------|-------------------|-----------------|------------|
+| Brand | | | | | |
+| Price Range | | | | | |
+| Storage (GB) | | | | | |
 
-### White-Box Testing Techniques
-
-| Coverage Type   | Target Function(s)     | Tool/Method | Coverage (%) |
-|-----------------|-----------------------|-------------|--------------|
-| Statement       | applyFilters()        | Manual      | 100%         |
-| Decision        | renderProducts()      | Manual      | 85%          |
+**Observations / Notes:**  
+-  
+-  
 
 ---
 
-## 3. Group Member Contributions
+## 🧮 2. Boundary Value Analysis (BVA)
 
-| Member    | Black-Box Techniques Applied          | White-Box Techniques Applied         | Other Contributions                |
-|-----------|--------------------------------------|-------------------------------------|------------------------------------|
-| @Member1  | Equivalence Partitioning: tested all brand and price ranges | Statement coverage: tested all lines in applyFilters() | Wrote bug report #12               |
-| @Member2  | Boundary Value Analysis: tested min/max storage and price | Decision coverage: tested if/else in renderProducts() | Documented test cases, summary     |
-| @Member3  | Decision Table: created filter combination matrix | Reviewed code paths and edge cases | Wrote bug report #14, reflections  |
+**Objective:** Test values around the edges of valid ranges.  
 
-*Each member should briefly describe their specific efforts and the techniques they applied.*
+| Parameter | Boundaries Identified | Test Values (−1 / = / +1) | Expected | Actual | Notes | Pass/Fail |
+|------------|------------------------|----------------------------|-----------|---------|--------|-----------|
+| Storage (GB) | | | | | | |
+| Price Range | | | | | | |
 
----
-
-## 4. Defect Log & GitHub Issues
-
-### Linked GitHub Issues
-
-- [#12: Price filter does not display expected products](https://github.com/PLP-Database-DEPT/swt-w4/issues/12)
-- [#14: Storage filter requires exact match](https://github.com/PLP-Database-DEPT/swt-w4/issues/14)
-
-### Bug Report 1
-
-**Title**: Price filter does not display expected products
-
-**Steps to Reproduce**:
-1. Select price range "1000-1500"
-2. Click "Apply Filters"
-
-**Expected**: Should display iPhone 14 Pro ($1499)  
-**Actual**: No products displayed  
-**Severity**: Medium
+**Summary:**  
+-  
+-  
 
 ---
 
-### Bug Report 2
+## 📊 3. Decision Table Testing (DTT)
 
-**Title**: Storage filter requires exact match
+**Objective:** Combine multiple filter inputs and predict outcomes.  
 
-**Steps to Reproduce**:
-1. Select storage "256GB"
-2. Click "Apply Filters"
+| Brand | Price Range | Storage (GB) | Expected Outcome (IDs / Count / Message) | Actual Outcome | Pass/Fail |
+|--------|--------------|---------------|-------------------------------------------|----------------|-----------|
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
+| | | | | | |
 
-**Expected**: Should display all products with 256GB storage  
-**Actual**: Only displays products if storage is an exact string match  
-**Severity**: Low
-
----
-
-## 5. Reflection
-
-**Challenges Faced:**  
-- Ensuring all edge cases (e.g., minimum/maximum price) were tested.
-- Interpreting ambiguous filter behaviors (e.g., overlapping ranges).
-
-**Collaboration Benefits:**  
-- Group discussions helped uncover bugs that were missed individually.
-- Sharing test cases improved overall coverage and efficiency.
-
-**Most Effective Techniques:**  
-- Boundary value analysis quickly revealed issues at price/storage limits.
-- Decision table testing was useful for complex filter combinations.
+**Findings:**  
+-  
+-  
 
 ---
 
-## 6. Coverage Gaps (Optional Visualization)
+## 🔄 4. State / Flow Testing
 
+**Objective:** Identify major UI states and test how the system transitions between them.  
 
-## 5. Coverage Gaps (Optional Visualization)
-![mermaidjs](https://github.com/user-attachments/assets/3f0e2915-2256-42be-b3ba-40b0ce0413cc)
+### **4.1 States Identified**
+- Start / Idle  
+- InputReady  
+- Results  
+- NoResults  
+- Reset / Clear  
+
+### **4.2 Actions and Transitions**
+
+| Current State | Action / Event | Expected Next State | Actual Next State | Pass/Fail |
+|----------------|----------------|---------------------|-------------------|-----------|
+| | | | | |
+| | | | | |
+| | | | | |
+
+### **4.3 Optional Mermaid Diagram**
+
+```mermaid
+stateDiagram-v2
+  [*] --> Start
+  Start --> InputReady: user selects filters
+  InputReady --> Results: click "Apply Filters"
+  Results --> NoResults: conditions exclude all
+  NoResults --> Results: adjust filters
+  Results --> Start: reset filters
+```
+
+## 🐞 5. Defect Reports Summary
+
+List your identified defects here and include links or filenames if using separate markdown files under `/defects/`.
+
+| ID | Title | Severity | Summary |
+|----|--------|-----------|----------|
+| BUG-01 |  |  |  |
+| BUG-02 |  |  |  |
+| BUG-03 *(optional)* |  |  |  |
 
 ---
 
-*End of Report*
+### 🧾 Example Format for Individual Defect (if written here)
+
+**Title:**  
+**Steps to Reproduce:**  
+1.  
+2.  
+3.  
+
+**Expected:**  
+**Actual:**  
+**Severity:**  
+**Notes:**  
+
+---
+
+## 💭 6. Reflection
+
+Answer briefly in your own words:
+
+- Which technique revealed issues most effectively?  
+- Did any values behave differently than expected?  
+- How would you improve your coverage next time?  
+- Which 2 test cases would you automate first and why?  
+
+---
+
+## 📎 7. Attachments (optional)
+
+- 📸 Screenshots  
+- 🧩 Diagrams  
+- 🧾 Logs or console messages  
+
+---
+
+**End of Report**  
+🧩 *Remember: the goal is clarity, reasoning, and test design accuracy — not perfection.*
