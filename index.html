@@ -472,109 +472,123 @@
       </div>
     </div>
   </div>
+<script>
+  // Updated Product Data with boundary and near-boundary values
+  const products = [
+    { id: 1, brand: 'apple', name: 'iPhone 13', price: 799, storage: 128 },
+    { id: 2, brand: 'samsung', name: 'Galaxy S22', price: 999, storage: 256 },
+    { id: 3, brand: 'google', name: 'Pixel 6', price: 599, storage: 128 },
+    { id: 4, brand: 'apple', name: 'iPhone SE', price: 429, storage: 64 },
+    { id: 5, brand: 'samsung', name: 'Galaxy Z Flip', price: 1299, storage: 512 },
+    { id: 6, brand: 'apple', name: 'iPhone 14 Pro', price: 1499, storage: 1024 },
+    // 🆕 Added boundary prices and storage edge cases
+    { id: 7, brand: 'google', name: 'Pixel 7a', price: 500, storage: 65 },     // lower price edge
+    { id: 8, brand: 'apple', name: 'iPhone 12 Mini', price: 1000, storage: 256 }, // mid price edge
+    { id: 9, brand: 'samsung', name: 'Galaxy S23 Ultra', price: 1500, storage: 1023 } // upper price edge
+  ];
 
-  <script>
-    // Product Data (Boundary Values: Min/Max Price, Storage)
-    const products = [
-      { id: 1, brand: 'apple', name: 'iPhone 13', price: 799, storage: 128 },
-      { id: 2, brand: 'samsung', name: 'Galaxy S22', price: 999, storage: 256 },
-      { id: 3, brand: 'google', name: 'Pixel 6', price: 599, storage: 128 },
-      { id: 4, brand: 'apple', name: 'iPhone SE', price: 429, storage: 64 },
-      { id: 5, brand: 'samsung', name: 'Galaxy Z Flip', price: 1299, storage: 512 },
-      { id: 6, brand: 'apple', name: 'iPhone 14 Pro', price: 1499, storage: 1024 }
-    ];
+  // DOM Elements
+  const brandFilter = document.getElementById('brand');
+  const priceFilter = document.getElementById('price-range');
+  const storageInput = document.getElementById('storage');
+  const storageError = document.getElementById('storage-error');
+  const applyBtn = document.getElementById('apply-filters');
+  const productsContainer = document.getElementById('products');
+  const productsCount = document.getElementById('products-count');
 
-    // DOM Elements
-    const brandFilter = document.getElementById('brand');
-    const priceFilter = document.getElementById('price-range');
-    const storageInput = document.getElementById('storage');
-    const storageError = document.getElementById('storage-error');
-    const applyBtn = document.getElementById('apply-filters');
-    const productsContainer = document.getElementById('products');
-    const productsCount = document.getElementById('products-count');
+  // 🆕 Added Reset Button for state transition testing
+  const resetBtn = document.createElement('button');
+  resetBtn.textContent = '🔄 Reset Filters';
+  resetBtn.style.marginTop = '1rem';
+  resetBtn.style.background = 'linear-gradient(135deg, var(--gray-500), var(--gray-700))';
+  resetBtn.style.color = 'white';
+  resetBtn.style.fontWeight = '600';
+  resetBtn.style.borderRadius = 'var(--radius-md)';
+  resetBtn.style.cursor = 'pointer';
+  resetBtn.addEventListener('click', resetFilters);
+  document.querySelector('.filters').appendChild(resetBtn);
 
-    // Initialize
-    document.addEventListener('DOMContentLoaded', () => renderProducts(products));
+  document.addEventListener('DOMContentLoaded', () => renderProducts(products));
 
-    // --- Core Functions for Testing ---
+  /**
+   * Applies all filters (Black-box: Decision Table, Equivalence Partitioning)
+   * @returns {boolean} False if validation fails
+   */
+  function applyFilters() {
+    const brand = brandFilter.value;
+    const priceRange = priceFilter.value;
+    const storage = parseInt(storageInput.value);
 
-    /**
-     * Applies all filters (Black-box: Decision Table, Equivalence Partitioning)
-     * @returns {boolean} False if validation fails
-     */
-    function applyFilters() {
-      const brand = brandFilter.value;
-      const priceRange = priceFilter.value;
-      const storage = parseInt(storageInput.value);
-
-      // Validate storage input (Boundary Analysis)
-      if (storageInput.value && (storage < 64 || storage > 1024)) {
-        storageError.classList.remove('hidden');
-        return false;
-      } else {
-        storageError.classList.add('hidden');
-      }
-
-      // Filter logic
-      let filtered = [...products];
-
-      if (brand) {
-        filtered = filtered.filter(p => p.brand === brand);
-      }
-
-      if (priceRange) {
-        const [min, max] = priceRange.split('-').map(Number);
-        filtered = filtered.filter(p => p.price >= min && p.price <= max); // Bug: Doesn't handle "1000-1500" correctly
-      }
-
-      if (storage) {
-        filtered = filtered.filter(p => p.storage === storage); // Intentional: Exact match only
-      }
-
-      renderProducts(filtered);
-      return true;
+    // Validate storage input (Boundary Analysis)
+    if (storageInput.value && (storage < 64 || storage > 1024)) {
+      storageError.classList.remove('hidden');
+      return false;
+    } else {
+      storageError.classList.add('hidden');
     }
 
-    /**
-     * Renders products to the DOM (White-box: Statement Coverage)
-     * @param {Array} products - Products to display
-     */
-    function renderProducts(products) {
-      // Update products count
-      productsCount.textContent = `${products.length} product${products.length !== 1 ? 's' : ''}`;
-      
-      if (products.length === 0) {
-        productsContainer.innerHTML = '<div class="no-results">No products match your filters. Try adjusting your criteria.</div>';
-        return;
-      }
+    let filtered = [...products];
 
-      let html = '';
-      products.forEach(product => {
-        const brandClass = `brand-${product.brand}`;
-        html += `
-          <div class="product-card" data-id="${product.id}">
-            <div class="product-header">
-              <h3>${product.name}</h3>
-              <span class="brand-badge ${brandClass}">${product.brand}</span>
+    if (brand) filtered = filtered.filter(p => p.brand === brand);
+
+    if (priceRange) {
+      const [min, max] = priceRange.split('-').map(Number);
+      filtered = filtered.filter(p => p.price >= min && p.price <= max); // known bug: inclusivity edge
+    }
+
+    if (storage) filtered = filtered.filter(p => p.storage === storage);
+
+    renderProducts(filtered);
+    return true;
+  }
+
+  /**
+   * Renders products to the DOM (White-box: Statement Coverage)
+   * @param {Array} products - Products to display
+   */
+  function renderProducts(products) {
+    productsCount.textContent = `${products.length} product${products.length !== 1 ? 's' : ''}`;
+    if (products.length === 0) {
+      productsContainer.innerHTML = '<div class="no-results">No products match your filters. Try adjusting your criteria.</div>';
+      return;
+    }
+
+    let html = '';
+    products.forEach(product => {
+      const brandClass = `brand-${product.brand}`;
+      html += `
+        <div class="product-card" data-id="${product.id}">
+          <div class="product-header">
+            <h3>${product.name}</h3>
+            <span class="brand-badge ${brandClass}">${product.brand}</span>
+          </div>
+          <div class="product-details">
+            <div class="product-detail">
+              <span class="detail-label">💰 Price</span>
+              <span class="detail-value price">$${product.price.toFixed(2)}</span>
             </div>
-            <div class="product-details">
-              <div class="product-detail">
-                <span class="detail-label">💰 Price</span>
-                <span class="detail-value price">$${product.price.toFixed(2)}</span>
-              </div>
-              <div class="product-detail">
-                <span class="detail-label">💾 Storage</span>
-                <span class="detail-value storage-value">${product.storage}GB</span>
-              </div>
+            <div class="product-detail">
+              <span class="detail-label">💾 Storage</span>
+              <span class="detail-value storage-value">${product.storage}GB</span>
             </div>
           </div>
-        `;
-      });
-      productsContainer.innerHTML = html;
-    }
+        </div>
+      `;
+    });
+    productsContainer.innerHTML = html;
+  }
 
-    // Event Listeners
-    applyBtn.addEventListener('click', applyFilters);
-  </script>
+  // 🆕 Reset Filters (for state testing)
+  function resetFilters() {
+    brandFilter.value = '';
+    priceFilter.value = '';
+    storageInput.value = '';
+    storageError.classList.add('hidden');
+    renderProducts(products);
+  }
+
+  applyBtn.addEventListener('click', applyFilters);
+</script>
+
 </body>
 </html>
